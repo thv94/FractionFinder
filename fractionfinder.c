@@ -1,14 +1,22 @@
 #include "fractionfinder.h"
 
-int main() 
+int main(int argc, char *argv[])
 {
-    const double searchnum = 0.314159;
+    double searchnum;
 
-    Fraction answer = findFraction(searchnum);
-
-    outputAnswer(answer);
-
-    return 0;
+    if (argc != 2)
+    {
+        printf("Usage: findfraction <num>\n");
+        return -1;
+    }
+    else
+    {
+        sscanf(argv[1], "%lf", &searchnum);
+        printf("SEARCHNUM = %f\n", searchnum);
+        Fraction answer = findFraction(searchnum);
+        outputAnswer(answer);
+        return 0;
+    }
 }
 
 Fraction findFraction(double searchnum)
@@ -18,7 +26,7 @@ Fraction findFraction(double searchnum)
     Fraction high = {1, 1, 1};
     Fraction mid;
 
-    for (int i = 0; i < ITERATIONS; i++) 
+    for (int i = 0; i < ITERATIONS; i++)
     {
         mid.num = low.num + high.num;
         mid.denom = low.denom + high.denom;
@@ -38,7 +46,7 @@ Fraction findFraction(double searchnum)
     return mid;
 }
 
-void outputAnswer(Fraction answer) 
+void outputAnswer(Fraction answer)
 {
     printf("%f\n", answer.value);
     printf("%f\n", answer.num);
