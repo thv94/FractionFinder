@@ -1,12 +1,26 @@
 #include <stdio.h>
 
-typedef struct Fraction 
+/***********
+ * GLOBALS *
+ ***********/
+
+#define ITERATIONS 1000
+
+/****************
+ * CUSTOM TYPES *
+ ****************/
+
+typedef struct
 {
     double num;
     double denom;
     double value;
 } Fraction;
 
-Fraction findFraction(double searchnum);
+/*************************
+ * FUNCTION DECLARATIONS *
+ *************************/
 
-void outputAnswer(Fraction answer);
+Fraction fractionfinder_find_fraction( double search_decimal );
+
+void fractionfinder_print_fraction( Fraction fraction );
