@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    int iterations = DEFAULT_ITERATIONS;
+    unsigned int iterations = DEFAULT_ITERATIONS;
     if ( NULL != argv[2] )
     {
         iterations = atoi(argv[2]);
@@ -55,31 +55,34 @@ int main(int argc, char *argv[])
  *  Determines if the given string is a valid decimal number
  *
  *  **************************************************************/
-bool fractionfinder_is_valid_decimal(const char *num_str) {
-    if (num_str == NULL || *num_str == '\0') 
+bool fractionfinder_is_valid_decimal(const char *num_str) 
+{
+    if ( ( NULL == num_str ) || ( *num_str == '\0' ) ) 
     {
         return false; // Empty string is not a valid decimal
     }
 
     // Flag to indicate if a decimal point has been encountered
     bool has_decimal_point = false;
+    
+    unsigned int num_str_len = strlen(num_str);
 
     // Check each character in the string
-    for (size_t i = 0; i < strlen(num_str); i++) 
+    for ( size_t i = 0; i < num_str_len; i++ ) 
     {
         char c = num_str[i];
 
-        if (c == '.') 
+        if ( c == '.' ) 
         {
             // Ensure that decimal point is not at end and appears only once
-            if (has_decimal_point || i == strlen(num_str) - 1) 
+            if ( has_decimal_point || ( i == num_str_len - 1 ) ) 
             {
                 return false;
             }
 
             has_decimal_point = true;
         } 
-        else if (false == isdigit(c)) 
+        else if ( false == isdigit(c) ) 
         {
             return false; // Non-digit characters are not allowed
         }
@@ -105,7 +108,7 @@ Fraction fractionfinder_find_fraction( const char *search_decimal, int iteration
     // Split the search string to just the decimal digits
     char *search_decimal_digits = strchr(search_decimal, '.') + 1;
 
-    int search_decimal_num_digits = strlen(search_decimal_digits);
+    unsigned int search_decimal_num_digits = strlen(search_decimal_digits);
 
     // Convert search string to decimal value for numerical comparison
     double search_decimal_value = strtod(search_decimal, NULL);
