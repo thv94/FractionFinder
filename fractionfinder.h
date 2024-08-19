@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +19,6 @@ typedef struct
  * FUNCTION DECLARATIONS *
  *************************/
 
-Fraction fractionfinder_find_fraction( const char* search_decimal, const int iterations );
-bool fractionfinder_compare_result(const int search_length, const char* search_decimal, const char* computed_decimal);
-int fractionfinder_count_decimal_digits( const char* search_decimal );
-void fractionfinder_print_fraction( const Fraction fraction );
+bool fractionfinder_is_valid_decimal(const char *str);
+Fraction fractionfinder_find_fraction( const char *search_decimal, const int iterations );
+void fractionfinder_print_fraction( const Fraction *fraction );
