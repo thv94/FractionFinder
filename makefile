@@ -5,7 +5,7 @@ SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = .o
 
-CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -std=$(CSTD)
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -I$(INC_DIR) -std=$(CSTD)
 
 TARGET = fractionfinder
 

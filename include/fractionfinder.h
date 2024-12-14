@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 /****************
  * CUSTOM TYPES *
@@ -14,6 +13,12 @@ typedef struct
     double denom;
     double value;
 } Fraction;
+
+typedef enum
+{
+    false,
+    true
+} bool;
 
 /*************************
  * FUNCTION DECLARATIONS *
