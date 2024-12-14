@@ -1,6 +1,6 @@
 #include "fractionfinder.h"
 
-// TODO: Add support for numbers larger than 1.
+/* TODO: Add support for numbers larger than 1. */
 
 #define MAX_LENGTH           50
 #define MIN_ARGS              2
@@ -50,31 +50,34 @@ int main(int argc, char *argv[])
 
 /******************************************************************
  *
- *  Operation: fractionfinder_is_valid_decimal
+ *  Function: fractionfinder_is_valid_decimal
  *
- *  Determines if the given string is a valid decimal number
+ *  Description:
+ *      Determines if the given string is a valid decimal number
  *
- *  **************************************************************/
+ ******************************************************************/
 bool fractionfinder_is_valid_decimal(const char *num_str) 
 {
+    size_t i;
+
     if ( ( NULL == num_str ) || ( *num_str == '\0' ) ) 
     {
-        return false; // Empty string is not a valid decimal
+        return false; /* Empty string is not a valid decimal */
     }
 
-    // Flag to indicate if a decimal point has been encountered
+    /* Flag to indicate if a decimal point has been encountered */
     bool has_decimal_point = false;
     
     unsigned int num_str_len = strlen(num_str);
 
-    // Check each character in the string
-    for ( size_t i = 0; i < num_str_len; i++ ) 
+    /* Check each character in the string */
+    for ( i = 0; i < num_str_len; i++ ) 
     {
         char c = num_str[i];
 
         if ( c == '.' ) 
         {
-            // Ensure that decimal point is not at end and appears only once
+            /* Ensure that decimal point is not at end and appears only once */
             if ( has_decimal_point || ( i == num_str_len - 1 ) ) 
             {
                 return false;
@@ -84,42 +87,44 @@ bool fractionfinder_is_valid_decimal(const char *num_str)
         } 
         else if ( false == isdigit(c) ) 
         {
-            return false; // Non-digit characters are not allowed
+            return false; /* Non-digit characters are not allowed */
         }
     }
 
-    return true; // If all checks passed, the string is a valid decimal
-} // fractionfinder_is_valid_decimal
+    return true; /* If all checks passed, the string is a valid decimal */
+} /* fractionfinder_is_valid_decimal */
 
 /******************************************************************
  *
- *  Operation: fractionfinder_find_fraction
+ *  Function: fractionfinder_find_fraction
+ *  
+ *  Description:
+ *      This operation takes a given decimal and returns the 
+ *      smallest equivalent fractional value pair via binary search.
  *
- *  This operation takes a given decimal and returns the smallest
- *  equivalent fractional value pair using binary search.
- *
- *  **************************************************************/
+ ******************************************************************/
 Fraction fractionfinder_find_fraction( const char *search_decimal, int iterations )
 {
+    int i;
     Fraction low  = { 0, 1, 0 };
     Fraction high = { 1, 1, 1 };
     Fraction mid;
 
-    // Split the search string to just the decimal digits
+    /* Split the search string to just the decimal digits */
     char *search_decimal_digits = strchr(search_decimal, '.') + 1;
 
     unsigned int search_decimal_num_digits = strlen(search_decimal_digits);
 
-    // Convert search string to decimal value for numerical comparison
+    /* Convert search string to decimal value for numerical comparison */
     double search_decimal_value = strtod(search_decimal, NULL);
 
-    for ( int i = 0; i < iterations; i++ )
+    for ( i = 0; i < iterations; i++ )
     {
         mid.num   = low.num + high.num;
         mid.denom = low.denom + high.denom;
         mid.value = mid.num / mid.denom;
 
-        // Convert mid.value to a string with just the decimal digits
+        /* Convert mid.value to a string with just the decimal digits */
         char mid_value_str[FLOAT_ROUND_LENGTH];
         snprintf(mid_value_str, FLOAT_ROUND_LENGTH, "%.*f", (search_decimal_num_digits+1), mid.value);
         const char *mid_value_digits = strchr(mid_value_str, '.') + 1;
@@ -141,16 +146,17 @@ Fraction fractionfinder_find_fraction( const char *search_decimal, int iteration
     }
 
     return mid;
-} // fractionfinder_find_fraction
+} /* fractionfinder_find_fraction */
 
 /******************************************************************
  *
  *  Operation: fractionfinder_print_fraction
  *
- *  This operation prints a given Fraction value.
+ *  Description:
+ *      This operation prints a given Fraction value.
  *
  ******************************************************************/
 void fractionfinder_print_fraction( const Fraction *fraction )
 {
     printf("%d / %d\n", (int)fraction->num, (int)fraction->denom);
-} // fractionfinder_print_fraction
+} /* fractionfinder_print_fraction */
