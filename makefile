@@ -1,11 +1,12 @@
 CC = gcc
 CSTD = c90
+OPT_LEVEL = -O2
 
 SRC_DIR = src
 INC_DIR = include
 OBJ_DIR = .o
 
-CFLAGS = -Wall -Wextra -Werror -Wpedantic -I$(INC_DIR) -std=$(CSTD)
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -I$(INC_DIR) -std=$(CSTD) $(OPT_LEVEL)
 
 TARGET = fractionfinder
 
