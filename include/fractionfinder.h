@@ -25,5 +25,5 @@ typedef enum
  *************************/
 
 bool fractionfinder_is_valid_decimal(const char *str);
-Fraction fractionfinder_find_fractionconst (char *search_decimal, const int iterations);
-void fractionfinder_print_fractionconst (Fraction *fraction);
+Fraction fractionfinder_find_fraction(const char *search_decimal, const int iterations);
+void fractionfinder_print_fraction(const Fraction *fraction);
