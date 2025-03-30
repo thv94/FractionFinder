@@ -1,5 +1,5 @@
 # FractionFinder
-CLI program in C to find fraction for given decimal.
+CLI program in ANSI C to find fraction for given decimal.
 
 # Usage
 ```
